@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ app_name }}</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="side" id="side">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="7" cy="19" r="2"/><path d="M7 6h5a4 4 0 0 1 4 4v0M17 12h-5a4 4 0 0 0-4 4v1"/></svg>
+      </div>
+      <div><div class="brand-name">{{ app_name }}</div><div class="brand-sub">Company X</div></div>
+    </div>
+
+    <button class="btn-new" id="newChat" type="button">New chat</button>
+
+    <section>
+      <h2>Where answers come from</h2>
+      <ul class="legend">
+        <li style="--c:var(--kb)"><i class="dot"></i><span><b>Company knowledge base</b>Your IT documents, searched first.</span></li>
+        <li style="--c:var(--web)"><i class="dot"></i><span><b>Public web</b>Only when company documents fall short.</span></li>
+        <li style="--c:var(--direct)"><i class="dot"></i><span><b>Direct reply</b>Greetings and small talk, no search.</span></li>
+        <li style="--c:var(--none)"><i class="dot"></i><span><b>Not enough evidence</b>Nothing reliable found.</span></li>
+      </ul>
+    </section>
+
+    <details class="ingest">
+      <summary>Add company document</summary>
+      <form id="ingestForm">
+        <label class="drop" id="drop" for="file">
+          <span id="dropText">Drop a file or click to browse<small>PDF, TXT, MD or DOCX</small></span>
+          <input type="file" id="file" accept=".pdf,.txt,.md,.docx" hidden>
+        </label>
+        <input type="password" id="adminKey" placeholder="Admin key" autocomplete="off" aria-label="Admin key">
+        <button class="btn-new" id="upload" type="submit" disabled>Upload and index</button>
+      </form>
+    </details>
+
+    <div class="side-foot">
+      <span class="status" id="status"><i class="dot"></i><span id="statusText">Checking service</span></span>
+      <button class="icon-btn" id="theme" type="button" aria-label="Switch between light and dark theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
+  </aside>
+  <div class="backdrop" id="backdrop"></div>
+
+  <main class="main">
+    <header class="top">
+      <button class="icon-btn" id="menu" type="button" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <strong>IT Support Copilot</strong>
+    </header>
+
+    <div class="feed" id="feed">
+      <div class="col">
+        <section class="welcome" id="welcome">
+          <h1>What do you need help with?</h1>
+          <p>Ask about VPN, passwords, MFA, software or laptops. I check company documents first and search the web only when they don’t have the answer.</p>
+          <div class="asks" id="asks"></div>
+        </section>
+        <div class="msgs" id="msgs" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <form class="composer" id="composer">
+      <div class="col">
+        <div class="box">
+          <textarea id="input" rows="1" maxlength="3000" placeholder="Ask an IT question" aria-label="Your question"></textarea>
+          <span class="count" id="count">0/3000</span>
+          <button class="send" id="send" type="submit" disabled aria-label="Send question">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </form>
+  </main>
+</div>
+<div class="toasts" id="toasts" role="status"></div>
+<script src="/static/js/app.js"></script>
+</body>
+</html>
